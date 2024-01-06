@@ -1,0 +1,43 @@
+version: "3.7"
+
+services:
+  mongodb:
+    image: mongo:latest
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $MONGO_HOST_PORT:$MONGO_CONTAINER_PORT
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USER
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+      - MONGO_INITDB_DATABASE=$MONGO_DATABASE
+    deploy:
+      resources:
+        limits:
+          memory: 300M
+          cpus: "0.2"
+  node:
+    depends_on:
+      - mongodb
+    build: .
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $NODE_HOST_PORT:$NODE_CONTAINER_PORT
+    volumes:
+      - .:/app
+    environment:
+      - DB_HOST=mongodb
+      - DB_USER=$MONGO_USER
+      - DB_PASSWORD=$MONGO_PASSWORD
+      - DB_NAME=$MONGO_DATABASE
+      - DB_PORT=$MONGO_HOST_PORT
+    links:
+      - mongodb
+    stdin_open: true
+    tty: true
+    deploy:
+      resources:
+        limits:
+          memory: 200M
+          cpus: "0.3"

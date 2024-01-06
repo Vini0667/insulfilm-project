@@ -1,0 +1,41 @@
+### Lista de tarefas
+
+|-----------------------------------------------------------------------------------------------|
+|                   Tarefa                                  |       Estado      |   Tem testes  |
+|-----------------------------------------------------------------------------------------------|
+|   1 - Fazer a conexão com o banco de dados.               |       Á fazer     |       Não     |
+|   2 - Fazer uma página inicial com a listagem de caixa.   |       Á fazer     |       Não     |
+|   3 - Implementar os cadastros:                           |###################|###############|
+|   3.1 - Cadastro de clientes.                             |       Á fazer     |       Não     |
+|   3.2 - Cadastro de material.                             |       Á fazer     |       Não     |
+|   3.3 - Cadastro do fluxo de caixa.                       |       Á fazer     |       Não     |
+|   4 Fazer as páginas de listagens:                        |###################|###############|
+|   4.1 - Listagem de clientes.                             |       Á fazer     |       Não     |
+|   4.2 - Listagem de material.                             |       Á fazer     |       Não     |
+|   4.3 - Listagem do fluxo de caixa.                       |       Á fazer     |       Não     |
+|   5 - Permitir excluir e editar os itens a qualquer       |                   |               |
+|   momento a partir das páginas de listagem.               |       Á fazer     |       Não     |
+|   --- Encaminhe para uma página igual a de cadastro,      |                   |               |
+|   porém com os dados já preenchidos para a edição.        |                   |               |
+|-----------------------------------------------------------------------------------------------|
+
+### Task List
+
+|-----------------------------------------------------------------------------------------------|
+|                   Task                                    |       Status      |   Has Test    |
+|-----------------------------------------------------------------------------------------------|
+|   1 - Make the connection to the database.                |       To make     |       No      |
+|   2 - Make a homepage with the cash list.                 |       To make     |       No      |
+|   3 - Implement the registers:                            |###################|###############|
+|   3.1 - Customers registration.                           |       To make     |       No      |
+|   3.2 - Material registration.                            |       To make     |       No      |
+|   3.3 - Cash flow registration.                           |       To make     |       No      |
+|   4 Make the listing pages:                               |###################|###############|
+|   4.1 - Customers lists.                                  |       To make     |       No      |
+|   4.2 - Material lists.                                   |       To make     |       No      |
+|   4.3 - Cash flow lists.                                  |       To make     |       No      |
+|   5 - Allow deleting and editing the items at any time    |                   |               |
+|   from the pages of listing.                              |       To make     |       No      |
+|   --- Forward to a page equal to registration, but with   |                   |               |
+|   data already completed for editing.                     |                   |               |
+|-----------------------------------------------------------------------------------------------|
