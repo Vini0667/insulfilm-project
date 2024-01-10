@@ -25,7 +25,7 @@
             };
 
             new Client(newClient).save().then(() => {
-                req.flash(`success_msg`, `O cadastro de ${req.body.name} foi um sucesso!`);
+                req.flash(`success_msg`, `O cadastro de: ${req.body.name} foi um sucesso!`);
                 res.redirect("/");
             }).catch((error) => {
                 req.flash(`error_msg`, `Ouve um erro interno no cadastramento. ERRO: ${error}. Tente novamente mais tarde`);

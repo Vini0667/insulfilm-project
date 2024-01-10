@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require(`mongoose`);
 
 const ExtractSchema = new mongoose.Schema({
     currentExtract: {
@@ -11,14 +11,14 @@ const ExtractSchema = new mongoose.Schema({
     },
     service: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "service",
+        ref: `service`,
     },
     material: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "material"
+        ref: `material`
     }
 });
 
-const Extract = mongoose.model("extract", ExtractSchema);
+const Extract = mongoose.model(`extract`, ExtractSchema);
 
 module.exports = Extract;

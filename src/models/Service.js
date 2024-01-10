@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require(`mongoose`);
 
 const ServiceSchema = new mongoose.Schema({
     serviceType: {
@@ -19,11 +19,11 @@ const ServiceSchema = new mongoose.Schema({
     },
     client: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "client",
+        ref: `client`,
         required: true
     }
 });
 
-const Service = mongoose.model("service", ServiceSchema);
+const Service = mongoose.model(`service`, ServiceSchema);
 
 module.exports = Service;

@@ -3,14 +3,16 @@
     {{else}}
 {{/each}}
 
+<h2> Cadastrar Cliente </h2>
+
 <div class="card">
     <div class="card-body">
         <form action="/client/register" method="post">
             <label for="name"> Informe o nome do cliente: </label>
-            <input class="form-control" type="text" name="name" id="name" placeholder="Digite aqui o nome do cliente:">
+            <input class="form-control" type="text" name="name" id="name" placeholder="Digite aqui o nome do cliente:" required>
 
             <label for="contact"> Informe o contato do cliente: </label>
-            <input class="form-control" type="text" name="contact" id="contact" placeholder="Digite aqui o contato do cliente:">
+            <input class="form-control" type="text" name="contact" id="contact" placeholder="Digite aqui o contato do cliente:" required>
 
             <button type="submit" class="btn btn-primary mt-4 position-absolute end-50"> Enviar </button>
         </form>
