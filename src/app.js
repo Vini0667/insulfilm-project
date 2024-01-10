@@ -11,6 +11,8 @@
     const { secret } = require("./define_secret_to_session.json");
     const client_router = require("./routers/client");
     const material_router = require("./routers/material");
+    const extract_router = require("./routers/extract");
+    const service_route = require("./routers/service");
 
 // Defining variables
     const app = express();
@@ -67,6 +69,8 @@ app.get("/", (req, res) => {
 // Defining routers
     app.use("/client", client_router);
     app.use("/material", material_router);
+    app.use("/service", service_route);
+    app.use("/extract", extract_router);
 
 app.listen(PORT, () => {
     console.log(`The server is running on ${PORT} port`)

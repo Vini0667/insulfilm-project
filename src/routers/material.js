@@ -6,8 +6,10 @@
 // Defining variables
     const router = express.Router();
 
-router.get("/", (req, res) => {
-    res.send("Hello");
-});
+// Routes
+
+// Get routes
+
+// Post routes
 
 module.exports = router;
