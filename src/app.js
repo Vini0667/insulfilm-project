@@ -10,6 +10,7 @@
     const url = require("./config/db");
     const { secret } = require("./define_secret_to_session.json");
     const client_router = require("./routers/client");
+    const material_router = require("./routers/material");
 
 // Defining variables
     const app = express();
@@ -33,6 +34,10 @@
     app.set("views", path.join(__dirname, "/views"));
 
 // Static files config
+    app.use(express.static(path.join(__dirname
+        , "/public")));
+
+// Parser config
     app.use(express.urlencoded({extended: true}));
     app.use(express.json());
 
@@ -55,12 +60,13 @@
 
 app.get("/", (req, res) => {
     res.render("index", {
-        title: "Olá"
+        title: "Home"
     });
 });
 
 // Defining routers
     app.use("/client", client_router);
+    app.use("/material", material_router);
 
 app.listen(PORT, () => {
     console.log(`The server is running on ${PORT} port`)
