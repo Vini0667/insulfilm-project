@@ -2,7 +2,7 @@
     const express = require(`express`);
 
 // Requiring my files
-    const { registerClientDataValidation } = require(`../helpers/helper_cliente`);
+    const { registerClientDataValidation } = require(`../helpers/client_helper`);
     const Client = require(`../models/Client`);
 
 // Defining variables
