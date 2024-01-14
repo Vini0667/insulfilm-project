@@ -3,7 +3,7 @@
 |-----------------------------------------------------------------------------------------------|
 |                   Tarefa                                  |       Estado      |   Tem testes  |
 |-----------------------------------------------------------------------------------------------|
-|   1 - Fazer a conexão com o banco de dados.               |       Á fazer     |       Não     |
+|   1 - Fazer a conexão com o banco de dados.               |       Feito       |       Não     |
 |   2 - Fazer uma página inicial com a listagem de caixa.   |       Á fazer     |       Não     |
 |   3 - Implementar os cadastros:                           |###################|###############|
 |   3.1 - Cadastro de clientes.                             |       Á fazer     |       Não     |
@@ -24,7 +24,7 @@
 |-----------------------------------------------------------------------------------------------|
 |                   Task                                    |       Status      |   Has Test    |
 |-----------------------------------------------------------------------------------------------|
-|   1 - Make the connection to the database.                |       To make     |       No      |
+|   1 - Make the connection to the database.                |       Done        |       No      |
 |   2 - Make a homepage with the cash list.                 |       To make     |       No      |
 |   3 - Implement the registers:                            |###################|###############|
 |   3.1 - Customers registration.                           |       To make     |       No      |
