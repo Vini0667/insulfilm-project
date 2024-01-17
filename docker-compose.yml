@@ -16,6 +16,9 @@ services:
         limits:
           memory: 300M
           cpus: "0.2"
+    stdin_open: true
+    tty: true
+    
   node:
     depends_on:
       - mongodb

@@ -1,6 +1,10 @@
 const mongoose = require(`mongoose`);
 
 const ExtractSchema = new mongoose.Schema({
+    message: {
+        type: String,
+        required: true
+    },
     currentExtract: {
         type: Number,
         required: true
@@ -16,6 +20,10 @@ const ExtractSchema = new mongoose.Schema({
     material: {
         type: mongoose.Schema.Types.ObjectId,
         ref: `material`
+    },
+    updateDate: {
+        type: Date,
+        default: Date.now
     }
 });
 

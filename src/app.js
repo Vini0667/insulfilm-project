@@ -59,10 +59,13 @@
         res.locals.error_msg = req.flash(`error_msg`);
         next();
     });
-
+const Extract = require("./models/Extract");
 app.get(`/`, (req, res) => {
-    res.render(`index`, {
-        title: `Home`
+    Extract.findOne().lean().sort({updateDate: "desc"}).then((extract) => {
+        res.render(`index`, {
+            title: `Home`,
+            currentExtract: extract.currentExtract
+        });
     });
 });
 
