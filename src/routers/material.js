@@ -2,9 +2,9 @@
     const express = require(`express`);
 
 // Requiring my files
-    const Material = require(`../models/Material`);
-    const Extract = require(`../models/Extract`);
-    const { registerMaterialValidation } = require("../helpers/material_helper");
+    const material_service = require(`../service/material_service`);
+    const extract_service = require(`../service/extract_service`);
+    const { registerMaterialValidation } = require(`../helpers/material_helper`);
 
 // Defining variables
     const router = express.Router();
@@ -13,10 +13,11 @@
 
     // Get routes
         router.get(`/register`, (req, res) => {
-            res.render("material/register-material", {
+            res.render(`material/register-material`, {
                 title: `Cadastro de material`
             });
         });
+    
     // Post routes
         router.post(`/register`, registerMaterialValidation, (req, res) => {
             let newMaterial = {
@@ -25,27 +26,42 @@
                 buyDate: req.body.buyDate
             };
 
-            new Material(newMaterial).save().then((material) => {
-                if (material) {
-                    Extract.findOne().lean().sort({updateDate: "desc"}).then((extract) => {
-                        let newExtract = {
-                            message: `Compra de ${req.body.name}`,
-                            currentExtract: (extract - req.body.cost),
-                            updateValue: - req.body.cost,
-                            material: material._id
-                        };
+            material_service.registerMaterial(newMaterial).then((material) => {
+                extract_service.findCurrentExtract().then((extract) => {
+                    let newExtract = {
+                        message: `Compra de ${material.name}`,
+                        currentExtract: (extract.currentExtract - material.cost),
+                        updateValue: (- material.cost),
+                        material: material._id
+                    };
 
-                        new Extract(newExtract).save().then(() => {
-                            req.flash(`success_msg`, `O cadastro do material: ${req.body.name} foi um sucesso`);
-                            res.redirect(`/`);
-                        }).catch((error) => {
-                            req.flash(`error_msg`, `Ouve um erro ao atualizar o extrato! ERRO ${error}`);
-                        });
+                    extract_service.registerExtract(newExtract).then(() => {
+                        req.flash(`success_msg`, `O cadastro do material "${material.name}" foi um sucesso!`);
+                        res.redirect(`/`);
                     }).catch((error) => {
-                        req.flash(`error_msg`, `Ouve um erro no cadastro do material! ERRO: ${error}`);
+                        req.flash(`error_msg`, `Ouve um erro ao atualizar o extrato! ERRO: ${error}`);
                         res.redirect(`/`);
                     });
-                }
+                }).catch((error) => {
+                    req.flash(`error_msg`, `Ouve um erro ao buscar o ultimo extrato! ERRO: ${error}`);
+                    res.redirect(`/`);
+                });
+                    // Extract.findOne().lean().sort({updateDate: `desc`}).then((extract) => {
+                    //     let newExtract = {
+                    //         message: `Compra de ${req.body.name}`,
+                    //         currentExtract: (extract - req.body.cost),
+                    //         updateValue: - req.body.cost,
+                    //         material: material._id
+                    //     };
+
+                    //     new Extract(newExtract).save().then(() => {
+                    //         req.flash(`success_msg`, `O cadastro do material: ${req.body.name} foi um sucesso`);
+                    //         res.redirect(`/`);
+                    //     }).catch((error) => {
+                    //         req.flash(`error_msg`, `Ouve um erro ao atualizar o extrato! ERRO ${error}`);
+                    //     });
+                    // })
+                
             }).catch((error) => {
                 req.flash(`error_msg`, `Nós tivemos um erro interno no cadastramento do material. ERRO: ${error}. Tente novamente mais tarde`);
                 res.redirect(`/`);
