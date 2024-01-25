@@ -1,35 +1,55 @@
 <h1> Página principal </h1>
+<div class="row">
+    <div class="col-8"></div>
+    <div class="col-4">
+        {{#if extract}}
+            <h1> Extrato atual: {{extract.currentExtract}} </h1>
+            {{else}}
+                <h1> Extrato atual: 0 </h1>
+        {{/if}}
+    </div>
+</div>
 
-<h2> Lista de clientes </h2>
-
-<h1> Extrato atual: {{currentExtract}} </h1>
-
-<table class="table table-secondary table-striped">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-        </tr>
-    </thead>
-    <tbody class="table-group-divider">
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-        </tr>
-    </tbody>
-</table>
+{{#if extract}}
+    {{#if extractList}}
+        <h2> Extrato: </h2>
+        <table class="mt-3 table table-secondary table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"> # </th>
+                    <th scope="col"> Mensagem </th>
+                    <th scope="col"> Valor que foi atualizado </th>
+                    <th scope="col"> Data </th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {{#each extractList}}
+                    <tr>
+                        <th scope="row"></th>
+                        <td> {{message}} </td>
+                        <td> {{updateValue}} </td>
+                        <td> {{updateDate}} </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col">
+                <a href="/{{returnExtractButton}}" class="btn btn-warning"> Anterior </a>
+            </div>
+            <div class="col-6"></div>
+            <div class="col">
+                <a href="/{{skipExtractButton}}" class="btn btn-primary"> Próximo </a>
+            </div>
+        </div>
+        {{else}}
+            <div class="row">
+                <div class="col">
+                    <a href="/{{returnExtractButton}}" class="btn btn-warning"> Anterior </a>
+                </div>
+            </div>
+            <h2 class="mt-3"> Não há mais histórico de extrato por aqui... </h2>
+    {{/if}}
+    {{else}}
+            <h2 class="mt-3"> Não há nada no extrato por enquanto... </h2>
+{{/if}}

@@ -7,6 +7,7 @@
     const flash = require(`connect-flash`);
 
 // Requiring my files
+    const extract_service = require(`./service/extract_service`);
     const url = require(`./config/db`);
     const { secret } = require(`./define_secret_to_session.json`);
     const client_router = require(`./routers/client`);
@@ -59,13 +60,46 @@
         res.locals.error_msg = req.flash(`error_msg`);
         next();
     });
-const Extract = require("./models/Extract");
+
 app.get(`/`, (req, res) => {
-    Extract.findOne().lean().sort({updateDate: "desc"}).then((extract) => {
-        res.render(`index`, {
-            title: `Home`,
-            currentExtract: extract.currentExtract
+    extract_service.findCurrentExtract().then((extract) => {
+        extract_service.findExtractWithLimits().then((extractList) => {
+            res.render(`index`, {
+                title: `Home`,
+                extract: extract ? extract : null,
+                extractList: extractList,
+                skipExtractButton: extract_service.DEFAULT_SKIP,
+                returnExtractButton: 0
+            });
+        }).catch((error) => {
+            req.flash(`error_msg`, `Ouve um erro ao buscar os extratos! ERRO ${error}`);
+            res.redirect(`/error`);
         });
+    });
+});
+
+app.get(`/:skip`, (req, res) => {
+    let skip = parseInt(req.params.skip) === 0 ? res.redirect(`/`) : parseInt(req.params.skip);
+    extract_service.findCurrentExtract().then((extract) => {
+        extract_service.findExtractWithLimits(skip).then((extractList) => {
+            res.render(`index`, {
+                title: `Home`,
+                extract: extract ? extract : null,
+                extractList: extractList.length !== 0 ? extractList : null,
+                skipExtractButton: (skip + extract_service.DEFAULT_SKIP),
+                returnExtractButton: (skip - extract_service.DEFAULT_SKIP)
+            });
+        }).catch((error) => {
+            req.flash(`error_msg`, `Ouve um erro ao buscar os extratos! ERRO ${error}`);
+            res.redirect(`/error`);
+        });
+    });
+});
+
+app.get(`/error`, (req, res) => {
+    res.render(`error`, {
+        title: `Erro`,
+        error: `ERRO 404`
     });
 });
 

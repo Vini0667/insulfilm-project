@@ -6,9 +6,9 @@
 |   1 - Fazer a conexão com o banco de dados.               |       Feito       |       Não     |
 |   2 - Fazer uma página inicial com a listagem de caixa.   |       Á fazer     |       Não     |
 |   3 - Implementar os cadastros:                           |###################|###############|
-|   3.1 - Cadastro de clientes.                             |       Á fazer     |       Não     |
-|   3.2 - Cadastro de material.                             |       Á fazer     |       Não     |
-|   3.3 - Cadastro do fluxo de caixa.                       |       Á fazer     |       Não     |
+|   3.1 - Cadastro de clientes.                             |       Feito       |       Não     |
+|   3.2 - Cadastro de material.                             |       Feito       |       Não     |
+|   3.3 - Cadastro do fluxo de caixa.                       |       Feito       |       Não     |
 |   4 Fazer as páginas de listagens:                        |###################|###############|
 |   4.1 - Listagem de clientes.                             |       Á fazer     |       Não     |
 |   4.2 - Listagem de material.                             |       Á fazer     |       Não     |
@@ -27,9 +27,9 @@
 |   1 - Make the connection to the database.                |       Done        |       No      |
 |   2 - Make a homepage with the cash list.                 |       To make     |       No      |
 |   3 - Implement the registers:                            |###################|###############|
-|   3.1 - Customers registration.                           |       To make     |       No      |
-|   3.2 - Material registration.                            |       To make     |       No      |
-|   3.3 - Cash flow registration.                           |       To make     |       No      |
+|   3.1 - Customers registration.                           |       Done        |       No      |
+|   3.2 - Material registration.                            |       Done        |       No      |
+|   3.3 - Cash flow registration.                           |       Done        |       No      |
 |   4 Make the listing pages:                               |###################|###############|
 |   4.1 - Customers lists.                                  |       To make     |       No      |
 |   4.2 - Material lists.                                   |       To make     |       No      |

@@ -30,7 +30,7 @@
                 extract_service.findCurrentExtract().then((extract) => {
                     let newExtract = {
                         message: `Compra de ${material.name}`,
-                        currentExtract: (extract.currentExtract - material.cost),
+                        currentExtract: extract ? (extract.currentExtract - material.cost) : - (material.cost),
                         updateValue: (- material.cost),
                         material: material._id
                     };
@@ -45,23 +45,7 @@
                 }).catch((error) => {
                     req.flash(`error_msg`, `Ouve um erro ao buscar o ultimo extrato! ERRO: ${error}`);
                     res.redirect(`/`);
-                });
-                    // Extract.findOne().lean().sort({updateDate: `desc`}).then((extract) => {
-                    //     let newExtract = {
-                    //         message: `Compra de ${req.body.name}`,
-                    //         currentExtract: (extract - req.body.cost),
-                    //         updateValue: - req.body.cost,
-                    //         material: material._id
-                    //     };
-
-                    //     new Extract(newExtract).save().then(() => {
-                    //         req.flash(`success_msg`, `O cadastro do material: ${req.body.name} foi um sucesso`);
-                    //         res.redirect(`/`);
-                    //     }).catch((error) => {
-                    //         req.flash(`error_msg`, `Ouve um erro ao atualizar o extrato! ERRO ${error}`);
-                    //     });
-                    // })
-                
+                });                
             }).catch((error) => {
                 req.flash(`error_msg`, `Nós tivemos um erro interno no cadastramento do material. ERRO: ${error}. Tente novamente mais tarde`);
                 res.redirect(`/`);

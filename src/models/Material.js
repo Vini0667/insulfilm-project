@@ -9,6 +9,11 @@ const MaterialSchema = new mongoose.Schema({
         type: Number,
         require: true
     },
+    stillUse: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
     buyDate: {
         type: Date,
         require: true
