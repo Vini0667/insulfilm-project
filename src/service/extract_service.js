@@ -1,7 +1,6 @@
-const Extract = require(`../models/Extract`);
-const DEFAULT_FIND_LIMIT = 20;
-const DEFAULT_FIND_SKIP = 0;
-const DEFAULT_SKIP = 20;
+// Requiring files 
+    const Extract = require(`../models/Extract`);
+    const default_find = require(`./default_find.json`);
 
 function registerExtract (extract) {
     return new Extract(extract).save();
@@ -15,16 +14,13 @@ function findAllExtract() {
     return Extract.find().lean();
 }
 
-function findExtractWithLimits(skip = DEFAULT_FIND_SKIP, limit = DEFAULT_FIND_LIMIT) {
-    return Extract.find().skip(skip).limit(limit).lean();
+function findWithLimits(skip = default_find.default_find_skip, limit = default_find.default_find_limit) {
+    return Extract.find().skip(skip).limit(limit).sort({updateDate: `desc`}).lean();
 }
 
 module.exports = {
     findCurrentExtract,
     registerExtract,
     findAllExtract,
-    findExtractWithLimits,
-    DEFAULT_FIND_LIMIT,
-    DEFAULT_FIND_SKIP,
-    DEFAULT_SKIP
+    findWithLimits
 }

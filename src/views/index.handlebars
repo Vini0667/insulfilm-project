@@ -1,19 +1,20 @@
-<h1> Página principal </h1>
+<h1> Ebenézer Insulfilm </h1>
 <div class="row">
     <div class="col-8"></div>
-    <div class="col-4">
-        {{#if extract}}
-            <h1> Extrato atual: {{extract.currentExtract}} </h1>
+    <div class="col-4 card">
+        {{#if additionalParams}}
+            <h1> Extrato atual: </h1>
+            <h2 id="currentExtract"> {{additionalParams.currentExtract}} </h2>
             {{else}}
                 <h1> Extrato atual: 0 </h1>
         {{/if}}
     </div>
 </div>
 
-{{#if extract}}
-    {{#if extractList}}
+{{#if additionalParams}}
+    {{#if list}}
         <h2> Extrato: </h2>
-        <table class="mt-3 table table-secondary table-striped">
+        <table class="mt-3 table table-hover table-secondary">
             <thead>
                 <tr>
                     <th scope="col"> # </th>
@@ -23,29 +24,30 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                {{#each extractList}}
+                {{#each list}}
                     <tr>
                         <th scope="row"></th>
                         <td> {{message}} </td>
-                        <td> {{updateValue}} </td>
-                        <td> {{updateDate}} </td>
+                        <td class="updateValueList"> {{updateValue}} </td>
+                        <td class="updateDateList"> {{updateDate}} </td>
                     </tr>
                 {{/each}}
             </tbody>
         </table>
+        
         <div class="row">
             <div class="col">
-                <a href="/{{returnExtractButton}}" class="btn btn-warning"> Anterior </a>
+                <a href="/{{previousButton}}" class="btn btn-warning"> Anterior </a>
             </div>
             <div class="col-6"></div>
             <div class="col">
-                <a href="/{{skipExtractButton}}" class="btn btn-primary"> Próximo </a>
+                <a href="/{{nextButton}}" class="btn btn-primary"> Próximo </a>
             </div>
         </div>
         {{else}}
             <div class="row">
                 <div class="col">
-                    <a href="/{{returnExtractButton}}" class="btn btn-warning"> Anterior </a>
+                    <a href="/{{previousButton}}" class="btn btn-warning"> Anterior </a>
                 </div>
             </div>
             <h2 class="mt-3"> Não há mais histórico de extrato por aqui... </h2>
@@ -53,3 +55,41 @@
     {{else}}
             <h2 class="mt-3"> Não há nada no extrato por enquanto... </h2>
 {{/if}}
+
+<script>
+    const currentExtract = document.getElementById(`currentExtract`);
+
+    if (currentExtract.textContent < 0) {
+        currentExtract.style.color = `red`;
+    } else if (currentExtract.textContent == 0) {
+        currentExtract.style.color = `gray`;
+    } else {
+        currentExtract.style.color = `green`;
+    }
+
+    const updateValueList = document.getElementsByClassName(`updateValueList`);
+    
+    for (let updateValue of updateValueList) {
+        if (updateValue.textContent < 0) {
+            updateValue.style.color = `red`;
+        } else if (updateValue.textContent == 0) {
+            updateValue.style.color = `gray`;
+        } else {
+            updateValue.style.color = `green`;
+        }
+    }
+
+    const updateDateList = document.getElementsByClassName(`updateDateList`);
+
+    for (let updateDate of updateDateList) {
+        let date = new Date(Date.parse(updateDate.textContent));
+        const locale = new Intl.Locale('pt-BR');
+        const dateFormatter = new Intl.DateTimeFormat(locale, {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        });
+        date = dateFormatter.format(date);
+        updateDate.textContent = date;
+    }
+</script>

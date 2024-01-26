@@ -6,7 +6,7 @@
     const session = require(`express-session`);
     const flash = require(`connect-flash`);
 
-// Requiring my files
+// Requiring files
     const extract_service = require(`./service/extract_service`);
     const url = require(`./config/db`);
     const { secret } = require(`./define_secret_to_session.json`);
@@ -14,6 +14,7 @@
     const material_router = require(`./routers/material`);
     const extract_router = require(`./routers/extract`);
     const service_route = require(`./routers/service`);
+    const listing = require(`./helpers/listing`);
 
 // Defining variables
     const app = express();
@@ -63,36 +64,13 @@
 
 app.get(`/`, (req, res) => {
     extract_service.findCurrentExtract().then((extract) => {
-        extract_service.findExtractWithLimits().then((extractList) => {
-            res.render(`index`, {
-                title: `Home`,
-                extract: extract ? extract : null,
-                extractList: extractList,
-                skipExtractButton: extract_service.DEFAULT_SKIP,
-                returnExtractButton: 0
-            });
-        }).catch((error) => {
-            req.flash(`error_msg`, `Ouve um erro ao buscar os extratos! ERRO ${error}`);
-            res.redirect(`/error`);
-        });
+        listing.listingDefaultPage({req, res}, extract_service, `Home`, `index`, `extrato`, extract);
     });
 });
 
 app.get(`/:skip`, (req, res) => {
-    let skip = parseInt(req.params.skip) === 0 ? res.redirect(`/`) : parseInt(req.params.skip);
     extract_service.findCurrentExtract().then((extract) => {
-        extract_service.findExtractWithLimits(skip).then((extractList) => {
-            res.render(`index`, {
-                title: `Home`,
-                extract: extract ? extract : null,
-                extractList: extractList.length !== 0 ? extractList : null,
-                skipExtractButton: (skip + extract_service.DEFAULT_SKIP),
-                returnExtractButton: (skip - extract_service.DEFAULT_SKIP)
-            });
-        }).catch((error) => {
-            req.flash(`error_msg`, `Ouve um erro ao buscar os extratos! ERRO ${error}`);
-            res.redirect(`/error`);
-        });
+        listing.listingSkipPage({req, res}, extract_service, `Home`, `index`, `extrato`, `/`, parseInt(req.params.skip), extract);
     });
 });
 

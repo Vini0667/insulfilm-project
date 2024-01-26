@@ -5,6 +5,7 @@
     const material_service = require(`../service/material_service`);
     const extract_service = require(`../service/extract_service`);
     const { registerMaterialValidation } = require(`../helpers/material_helper`);
+    const listing = require(`../helpers/listing`);
 
 // Defining variables
     const router = express.Router();
@@ -17,12 +18,20 @@
                 title: `Cadastro de material`
             });
         });
+
+        router.get(`/listing`, (req, res) => {
+            listing.listingDefaultPage({req, res}, material_service, `Lista de materiais`, `material/listing-material`, `material`);
+        });
+
+        router.get(`/listing/:skip`, (req, res) => {
+            listing.listingSkipPage({req, res}, material_service, `Lista de materiais`, `material/listing-material`, `material`, `/material/listing`,parseInt(req.params.skip));
+        });
     
     // Post routes
         router.post(`/register`, registerMaterialValidation, (req, res) => {
             let newMaterial = {
                 name: req.body.name,
-                cost: req.body.cost,
+                cost: - req.body.cost,
                 buyDate: req.body.buyDate
             };
 
@@ -30,8 +39,8 @@
                 extract_service.findCurrentExtract().then((extract) => {
                     let newExtract = {
                         message: `Compra de ${material.name}`,
-                        currentExtract: extract ? (extract.currentExtract - material.cost) : - (material.cost),
-                        updateValue: (- material.cost),
+                        currentExtract: extract ? (extract.currentExtract + material.cost) :material.cost,
+                        updateValue: material.cost,
                         material: material._id
                     };
 

@@ -8,6 +8,10 @@ const clientSchema = new mongoose.Schema({
     contact: {
         type: String,
         required: true
+    },
+    registerDate: {
+        type: Date,
+        default: Date.now
     }
 });
 

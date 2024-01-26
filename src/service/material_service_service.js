@@ -1,4 +1,6 @@
-const MaterialService = require(`../models/MaterialService`);
+// Requiring files
+    const MaterialService = require(`../models/MaterialService`);
+    const default_find = require(`./default_find.json`);
 
 function relatesMaterialsToTheService (service_id, materials_ids, {req, res}) {
     materials_ids.forEach(material_id => {

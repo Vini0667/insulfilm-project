@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "private": true,
     "scripts": {
-        "start": "nodemon --inspect=0.0.0.0 ./src/app.js"
+        "start": "npm install --save && nodemon --inspect=0.0.0.0 ./src/app.js"
     },
     "dependencies": {
         "connect-flash": "^0.1.1",

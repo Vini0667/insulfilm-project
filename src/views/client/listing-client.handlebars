@@ -1,0 +1,38 @@
+{{#if list}}
+        <h2> Clientes: </h2>
+        <table class="mt-3 table table-hover table-secondary">
+            <thead>
+                <tr>
+                    <th scope="col"> # </th>
+                    <th scope="col"> Nome do cliente </th>
+                    <th scope="col"> Contato do cliente </th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {{#each list}}
+                    <tr>
+                        <th scope="row"></th>
+                        <td> {{name}} </td>
+                        <td class="costList"> {{contact}} </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        
+        <div class="row">
+            <div class="col">
+                <a href="/client/listing/{{previousButton}}" class="btn btn-warning"> Anterior </a>
+            </div>
+            <div class="col-6"></div>
+            <div class="col">
+                <a href="/client/listing/{{nextButton}}" class="btn btn-primary"> Próximo </a>
+            </div>
+        </div>
+        {{else}}
+            <div class="row">
+                <div class="col">
+                    <a href="/client/listing/{{previousButton}}" class="btn btn-warning"> Anterior </a>
+                </div>
+            </div>
+            <h2 class="mt-3"> Não há mais histórico de clientes por aqui... </h2>
+    {{/if}}
