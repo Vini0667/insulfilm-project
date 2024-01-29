@@ -7,6 +7,7 @@
     const { registerMaterialValidation } = require(`../helpers/material_helper`);
     const listing = require(`../helpers/listing`);
     const material_service_service = require(`../service/material_service_service`);
+    const default_find = require(`../service/default_find.json`);
 
 // Defining variables
     const router = express.Router();
@@ -36,6 +37,23 @@
                     serviceType: req.params.serviceType ? `serviço para carro.` : `serviço para blindex.`,
                     materials: materials
                 });
+            });
+        });
+
+        router.get(`/edit/:id/:next_page`, (req, res) => {
+            let redirect;
+            if ((parseInt(req.params.next_page) - default_find.default_skip) == 0) {
+                redirect = `/material/listing`;
+            } else {
+                redirect = `/material/listing/${(parseInt(req.params.next_page) - default_find.default_skip)}`;
+            }
+
+            material_service.alterStillUseCampById(req.params.id).then(() => {
+                req.flash(`success_msg`, `A mudança do material para sem uso foi um sucesso`);
+                res.redirect(redirect);
+            }).catch((error) => {
+                req.flash(`error_msg`, `Ouve um erro na mudança do material! ERRO: ${error}`);
+                res.redirect(redirect);
             });
         });
     

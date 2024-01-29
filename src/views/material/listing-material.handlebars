@@ -7,6 +7,8 @@
                     <th scope="col"> Nome do material </th>
                     <th scope="col"> Valor de compra </th>
                     <th scope="col"> Data de compra </th>
+                    <th scope="col"> Está disponível para uso </th>
+                    <th scope="col"> Deixar disponível ou indisponível para uso </th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -16,11 +18,18 @@
                         <td> {{name}} </td>
                         <td class="costList"> {{cost}} </td>
                         <td class="buyDateList"> {{buyDate}} </td>
+                        {{#if stillUse}}
+                            <td> Sim </td>
+                            <td><a class="btn btn-danger" href="/material/edit/{{_id}}/{{../nextButton}}"> Deixar indisponível </a></td>
+                            {{else}}
+                                <td> Não </td>
+                                <td><a class="btn btn-primary" href="/material/edit/{{_id}}/{{../nextButton}}"> Deixar disponível </a></td>
+                        {{/if}}
                     </tr>
                 {{/each}}
             </tbody>
         </table>
-        
+
         <div class="row">
             <div class="col">
                 <a href="/material/listing/{{previousButton}}" class="btn btn-warning"> Anterior </a>
