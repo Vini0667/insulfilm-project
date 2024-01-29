@@ -1,0 +1,43 @@
+<h2 class="mt-3"> Material usado no {{serviceType}} </h2>
+
+<div class="card mt-4">
+    <div class="card-body">
+        {{#each materials}}
+            <hr>
+            <h3> Nome do material: {{material.name}} </h3>
+            <p> Custo do material: <span class="costList"> {{material.cost}} </span></p>
+            <p> Data da compra: <small class="buyDateList"> {{material.buyDate}} </small></p>
+            <hr>
+        {{/each}}
+    </div>
+</div>
+
+<a href="/service/listing" class="btn btn-primary mt-3"> Voltar </a>
+
+<script>
+    const costList = document.getElementsByClassName(`costList`);
+    
+    for (let updateValue of costList) {
+        if (updateValue.textContent < 0) {
+            updateValue.style.color = `red`;
+        } else if (updateValue.textContent == 0) {
+            updateValue.style.color = `gray`;
+        } else {
+            updateValue.style.color = `green`;
+        }
+    }
+
+    const buyDateList = document.getElementsByClassName(`buyDateList`);
+
+    for (let updateDate of buyDateList) {
+        let date = new Date(Date.parse(updateDate.textContent));
+        const locale = new Intl.Locale('pt-BR');
+        const dateFormatter = new Intl.DateTimeFormat(locale, {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        });
+        date = dateFormatter.format(date);
+        updateDate.textContent = date;
+    }
+</script>

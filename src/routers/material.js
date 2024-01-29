@@ -6,6 +6,7 @@
     const extract_service = require(`../service/extract_service`);
     const { registerMaterialValidation } = require(`../helpers/material_helper`);
     const listing = require(`../helpers/listing`);
+    const material_service_service = require(`../service/material_service_service`);
 
 // Defining variables
     const router = express.Router();
@@ -25,6 +26,17 @@
 
         router.get(`/listing/:skip`, (req, res) => {
             listing.listingSkipPage({req, res}, material_service, `Lista de materiais`, `material/listing-material`, `material`, `/material/listing`,parseInt(req.params.skip));
+        });
+
+        router.get(`/list-of-service-materials/:id/:serviceType`, (req, res) => {
+            req.params.serviceType = req.params.serviceType === `true`;
+            material_service_service.findAllMaterialsByServiceId(req.params.id).then((materials) => {
+                res.render(`material/list-materials-used-in-the-service`, {
+                    title: `Materiais usados`,
+                    serviceType: req.params.serviceType ? `serviço para carro.` : `serviço para blindex.`,
+                    materials: materials
+                });
+            });
         });
     
     // Post routes

@@ -8,6 +8,7 @@
     const extract_service = require(`../service/extract_service`);
     const client_service = require(`../service/client_service`);
     const { registerServiceValidation } = require (`../helpers/service_helper`);
+    const listing = require(`../helpers/listing`);
 
 // Defining variables
     const router = express.Router();
@@ -33,15 +34,22 @@
         });
     });
 
+    router.get(`/listing`, (req, res) => {
+        listing.listingDefaultPage({req, res}, service_service, `Lista de serviços`, `service/listing-service`, `Serviços`);
+    });
+
+    router.get(`/listing/:skip`, (req, res) => {
+        listing.listingSkipPage({req, res}, service_service, `Lista de serviços`, `service/listing-service`, `Serviços`, `/service/listing`, parseInt(req.params.skip));
+    });
+
 // Post routes
-    router.post(`/register`, registerServiceValidation, (req, res) => { // Refatorar toda essa merda antes de dar merge
-        console.log(req.body);
+    router.post(`/register`, registerServiceValidation, (req, res) => {
         req.body.serviceType = req.body.serviceType === `true`;
         let serviceType = req.body.serviceType ? `carro` : `blindex`;
         let newService = {
             serviceType: req.body.serviceType,
             price: req.body.price,
-            spending: req.body.spending,
+            spending: - req.body.spending,
             serviceDate: req.body.serviceDate,
             client: req.body.client
         };
@@ -51,8 +59,8 @@
             extract_service.findCurrentExtract().then((currentExtract) => {
                 let newExtract = {
                     message: `Realizado serviço de um ${serviceType}`,
-                    currentExtract: currentExtract.currentExtract + (service.price - service.spending),
-                    updateValue: (service.price - service.spending),
+                    currentExtract: (currentExtract.currentExtract + service.price + service.spending),
+                    updateValue: (service.price + service.spending),
                     service: service._id
                 };
 

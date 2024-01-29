@@ -12,7 +12,7 @@
 |   4 Fazer as páginas de listagens:                        |###################|###############|
 |   4.1 - Listagem de clientes.                             |       Feito       |       Não     |
 |   4.2 - Listagem de material.                             |       Feito       |       Não     |
-|   4.3 - Listagem dos serviços.                            |       Á fazer     |       Não     |
+|   4.3 - Listagem dos serviços.                            |       Frito       |       Não     |
 |   5 - Permitir excluir e editar os itens a qualquer       |                   |               |
 |   momento a partir das páginas de listagem.               |       Á fazer     |       Não     |
 |   --- Encaminhe para uma página igual a de cadastro,      |                   |               |
@@ -33,7 +33,7 @@
 |   4 Make the listing pages:                               |###################|###############|
 |   4.1 - Customers lists.                                  |       Done        |       No      |
 |   4.2 - Material lists.                                   |       Done        |       No      |
-|   4.3 - Done service lists.                               |       To make     |       No      |
+|   4.3 - Done service lists.                               |       Done        |       No      |
 |   5 - Allow deleting and editing the items at any time    |                   |               |
 |   from the pages of listing.                              |       To make     |       No      |
 |   --- Forward to a page equal to registration, but with   |                   |               |

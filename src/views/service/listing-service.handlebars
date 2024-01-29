@@ -1,0 +1,91 @@
+{{#if list}}
+        <h2> Serviços: </h2>
+        <table class="mt-3 table table-hover table-secondary">
+            <thead>
+                <tr>
+                    <th scope="col"> # </th>
+                    <th scope="col"> Tipo do serviço </th>
+                    <th scope="col"> Preço cobrado </th>
+                    <th scope="col"> Gastos extras </th>
+                    <th scope="col"> Cliente </th>
+                    <th scope="col"> Data do serviço </th>
+                    <th scope="col"> Materiais usados </th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {{#each list}}
+                    <tr>
+                        <th scope="row"></th>
+                        {{#if serviceType}}
+                            <td> Serviço para um carro </td>
+                            {{else}}
+                                <td> Serviço para um blindex </td>
+                        {{/if}}
+                        <td class="priceList"> {{price}} </td>
+                        <td class="spendingList"> {{spending}} </td>
+                        <td> {{client.name}} </td>
+                        <td class="dateList"> {{serviceDate}} </td>
+                        <td> <a href="/material/list-of-service-materials/{{_id}}/{{serviceType}}" class="btn btn-primary"> Material usado </a> </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        
+        <div class="row">
+            <div class="col">
+                <a href="/service/listing/{{previousButton}}" class="btn btn-warning"> Anterior </a>
+            </div>
+            <div class="col-6"></div>
+            <div class="col">
+                <a href="/service/listing/{{nextButton}}" class="btn btn-primary"> Próximo </a>
+            </div>
+        </div>
+        {{else}}
+            <div class="row">
+                <div class="col">
+                    <a href="/service/listing/{{previousButton}}" class="btn btn-warning"> Anterior </a>
+                </div>
+            </div>
+            <h2 class="mt-3"> Não há mais histórico de clientes por aqui... </h2>
+{{/if}}
+
+<script>
+    const dateList = document.getElementsByClassName(`dateList`);
+    let locale = new Intl.Locale(`pt-BR`);
+    let dateFormatter = Intl.DateTimeFormat(locale, {
+        year: `numeric`,
+        day: "2-digit",
+        month: "2-digit"
+    });
+    let updateDate;
+
+    for (let date of dateList) {
+        updateDate = new Date(Date.parse(date.textContent));
+        updateDate = dateFormatter.format(updateDate);
+        date.textContent = updateDate;
+    }
+
+    const spendingList = document.getElementsByClassName(`spendingList`);
+
+    for (let spending of spendingList) {
+        if (spending.textContent > 0) {
+            spending.style.color = `green`;
+        } else if (spending.textContent === 0) {
+            spending.style.color = `gray`;
+        } else {
+            spending.style.color = `red`;
+        }
+    }
+
+     const priceList = document.getElementsByClassName(`priceList`);
+
+    for (let price of priceList) {
+        if (price.textContent > 0) {
+            price.style.color = `green`;
+        } else if (price.textContent === 0) {
+            price.style.color = `gray`;
+        } else {
+            price.style.color = `red`;
+        }
+    }
+</script>
