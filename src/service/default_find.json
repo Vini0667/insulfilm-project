@@ -1,5 +1,5 @@
 {
     "default_find_skip" : 0,
-    "default_find_limit": 1,
-    "default_skip": 1
+    "default_find_limit": 20,
+    "default_skip": 20
 }
